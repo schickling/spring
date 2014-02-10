@@ -24,7 +24,7 @@ function init() {
     }, 20);
 
     canvas.addEventListener('mousemove', function () {
-        t += 0.1;
+        t += 0.01;
     });
 }
 
