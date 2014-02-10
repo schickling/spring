@@ -31,10 +31,12 @@ function createLine() {
 
     while (x < width + 2 * xGap) {
         y = rand(y);
-        var coord = {
+        var hex = colors[Math.floor(r() * colors.length)],
+            rgb = hexToRgb(hex),
+            coord = {
             x: x,
             y: y,
-            color: colors[Math.floor(r() * colors.length)],
+            color: "rgba(" + rgb.r + ", " + rgb.g + ", " + rgb.b + ", 0.4)",
             sign: sign(0.5 - r())
         };
         line.push(coord);
@@ -89,4 +91,19 @@ function drawLine(line) {
 
 function sign(number) {
     return number < 0 ? -1 : 1;
+}
+
+
+function hexToRgb(hex) {
+    var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+        return r + r + g + g + b + b;
+    });
+
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
 }
