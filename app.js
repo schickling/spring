@@ -22,6 +22,10 @@ function init() {
         t += r() * 0.001 + 0.002;
         draw();
     }, 20);
+
+    canvas.addEventListener('mousemove', function () {
+        t += 0.1;
+    });
 }
 
 function createLine() {
